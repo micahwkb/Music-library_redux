@@ -33,27 +33,11 @@ class Playlist {
     this.trackCount = this.tracks.length
   }
   totalDuration() {
-    let total = 0;
-    this.tracks.forEach((track) => {
-      total += track.trackLength;
-    })
-    return total;
-    // using 'reduce' here produces NaN after more than 2 tracks
-    // return this.tracks.reduce((a, b) => {
-    //   return a.trackLength + b.trackLength;
-    // })
+    return this.tracks.reduce((sum, a) => sum += a.trackLength, 0)
   }
   overallRating() {
-    let ratingTotal = 0;
-    this.tracks.forEach((track) => {
-      ratingTotal += track.rating;
-    })
-    return (ratingTotal / this.tracks.length).toFixed(1);
-    // as above, re 'reduce'
-    // let sumRating = this.tracks.reduce((a, b) => {
-    //   return a.rating + b.rating;
-    // });
-    // return sumRating / this.tracks.length;
+    const sumRating = this.tracks.reduce((sum, a) => sum += a.rating, 0);
+    return (sumRating / this.tracks.length).toFixed(1);
   }
 }
 
